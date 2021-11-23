@@ -43,6 +43,26 @@ while not dead
         script 'gtfo'
     endif
 	
+    //Pause when party menu is up
+    while gumpexists 3527489586
+    overhead 'pause'
+    say '[coord]
+        while not dead
+            if insysmsg 'tracking'
+                script 'gtfo'
+            endif
+            if not gumpexists 3527489586
+                if rhandempty ?? 0
+                    dclicktype 'pickaxe' 'backpack'
+                    wait 600
+                endif
+                overhead 'resume'
+                dclick hands
+                break
+            endif
+        endwhile 
+    endwhile
+
 	//World save safety
     if insysmsg 'world will save in 15'
         overhead 'world save incomming' 40
