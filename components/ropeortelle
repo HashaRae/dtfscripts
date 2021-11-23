@@ -1,0 +1,14 @@
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE

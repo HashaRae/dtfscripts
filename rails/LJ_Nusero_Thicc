@@ -1,0 +1,7177 @@
+//startlogic
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 342 1870 2
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 340 1875 0
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 337 1879 0
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 336 1882 2
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 340 1883 2
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 340 1879 0
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 342 1875 0
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 346 1875 0
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 345 1878 0
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 342 1883 0
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 342 1886 0
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 345 1887 0
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 346 1883 0
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 346 1879 0
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 346 1875 0
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 349 1876 4
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 350 1879 2
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 350 1883 0
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 350 1886 1
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 351 1889 1
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 355 1885 4
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 355 1880 4
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 358 1887 3
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 361 1882 3
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 359 1878 1
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 363 1878 0
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 365 1881 0
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 365 1876 0
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 369 1878 0
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 369 1874 0
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 373 1872 2
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 372 1877 0
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 375 1876 2
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 376 1872 2
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 378 1869 2
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 381 1874 2
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 381 1869 2
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 387 1874 5
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 386 1870 5
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 384 1865 5
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 384 1861 5
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 387 1858 5
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 391 1858 5
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 389 1863 5
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 389 1867 5
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 388 1872 5
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 392 1870 5
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 393 1865 5
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 392 1860 5
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 393 1857 11
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 396 1858 12
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 396 1863 11
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+// BEGIN - ROPE OR TELE
+clearsysmsg
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif
+wait 666
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+targetloc 398 1868 10
+//At a node
+clearsysmsg
+say '[coord'
+wait 610
+say 'all follow me'
+wait 610
+say 'all guard me'
+wait 1000
+
+//Start the lumberjacking process with a 1 time lumberjacking action
+if lhandempty ?? 0
+	dclicktype '3908' 'backpack'
+	wait 600
+endif
+dclick hands
+waitfortarget 2000
+target self
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a hatchet is equipped
+    if lhandempty ?? 0
+        dclicktype '3908' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you chop some = succesfully gathered
+    //you hack at the = succesfully gathered
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'You chop some' or insysmsg 'You hack at the' or insysmsg 'worn out' or insysmsg 'no longer hindered'
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+	
+	//Break out of the permanent loop if there is nothing left to gather at this node.
+	if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No lumber!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3908' 'self'
+	    overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+	
+	//World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+			overhead 'pausing activity for world save'
+            for 20
+                wait 800
+				if skill 'hiding' > 0 and not hidden
+					skill 'hiding'
+				endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+			//Give up. 16 seconds have passed. Just move on.
+			removetimer 'waitForSave'
+            dclick hands
+			waitfortarget 2000
+			target self
+        endif
+    endif
+    
+    //Hand lumber to packhorses if overweight
+    if diffweight < 15
+
+		//Convert Logs -> Boards
+		for 10
+            overhead 'Making Boards...' 40            
+			dclicktype 7133 'backpack'
+			wait 615
+			if insysmsg 'item or mobile type'
+			    break
+			endif
+        endfor
+		
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+		waitfortarget 2000
+		target self
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+script 'gtfo'

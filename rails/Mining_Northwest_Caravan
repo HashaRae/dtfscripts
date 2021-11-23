@@ -1,0 +1,5902 @@
+//STARTLOGIC
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1529 780
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1525 785
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1529 791
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1532 794
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1539 793
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1542 795
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1550 793
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1554 799
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1556 808
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1561 816
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1564 824
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1568 832
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1562 840
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1561 846
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1567 853
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1575 855
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1579 855
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1580 849
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1586 848
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1590 852
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1593 855
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1599 858
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1599 851
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1596 842
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1588 836
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1584 831
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1584 828
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1588 820
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1590 817
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1585 809
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1581 800
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1577 790
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1576 786
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1582 777
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+//BROKE HERE
+targetloc 1590 769
+//BROKE HERE
+
+wait 14000
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1597 766
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1602 769
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1610 768
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1618 766
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1624 761
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1621 754
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1623 748
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1617 743
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1612 743
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1604 750
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1597 754
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1587 757
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1583 753
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1579 744
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1586 739
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1592 733
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1588 726
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1584 726
+
+
+//At a node
+clearsysmsg
+wait 1250
+say '[coord'
+say 'all follow me'
+
+//Start the mining process with a 1 time mining action
+if rhandempty ?? 0
+dclicktype '3718' 'backpack'
+wait 600
+endif
+dclick hands
+
+//Start the permanent loop.
+while not dead
+
+    //Make sure a pickaxe is equipped
+    if rhandempty ?? 0
+        dclicktype '3718' 'backpack'
+        wait 600
+    endif
+    
+    //Now begin monitoring for results:
+    //you dig some = succesfully mined
+    //you losen some = succesfully mined
+    //no longer hindered = you have completed a rope action
+    if insysmsg 'you dig some' or insysmsg 'you loosen some' or insysmsg 'no longer hindered'
+        dclick hands
+    endif
+    
+    //Break out of the permanent loop if there is nothing left to gather at this node.
+    if insysmsg 'you do not see any harvestable resources nearby'
+        overhead 'No ore!' 55
+        break
+    endif
+
+    //Check Tracking for murderers and check if we have a tool
+    if insysmsg 'tracking' or not findtype '3718' 'self'
+        overhead 'PK Alert or no tools' 33
+        script 'gtfo'
+    endif
+    
+    //World save safety
+    if insysmsg 'world will save in 15'
+        overhead 'world save incomming' 40
+        createtimer 'waitForSave'
+        settimer 'waitForSave' 0
+    endif
+    if timerexists 'waitForSave'
+        if timer 'waitForSave' > 12000
+            for 20
+                wait 800
+                if skill 'hiding' > 0 and not hidden
+                    skill 'hiding'
+                endif
+                if insysmsg 'Now Tracking'
+                    overhead 'PK Alert' 33
+                    script 'gtfo'
+                endif
+                if insysmsg 'world save complete'
+                    removetimer 'waitForSave'
+                    break
+                endif
+            endfor
+            //Give up. 16 seconds have passed. Just move on.
+            removetimer 'waitForSave'
+            dclick hands
+        endif
+    endif
+    
+    //Hand ore to packhorses if overweight
+    if diffweight < 15
+        hotkey 'Next Friend Target'
+        wait 500
+        organizer 6 'set'
+        waitfortarget 1000
+        lasttarget
+        wait 1000
+        organizer 6
+        //Build a shortcircuitable buffer of time for organizer to move goods to llama.
+        for 10
+            if not queued
+                break
+            endif
+            overhead 'organizing...' 40
+            wait 615
+        endfor
+        dclick hands
+    endif
+    
+    //Wait 20 milliseconds just to chill
+    wait 20
+endwhile
+
+
+// BEGIN - ROPE OR TELE
+if findtype '5370' 'backpack'
+    dclicktype '5370' 'backpack'
+endif    
+if mana < 19 and insysmsg 'you must wait a few moments before you may use this item again'
+    wait 8000
+    dclicktype '5370' 'backpack'
+else
+    cast 'teleport'    
+endif
+wft 3000
+// END - ROPE OR TELE
+
+targetloc 1578 729
+script 'gtfo'

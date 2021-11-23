@@ -1,0 +1,506 @@
+startlogic
+innerloop
+ropeortele
+targetloc 1650 3036 0
+innerloop
+ropeortele
+targetloc 1649 3030 0
+innerloop
+ropeortele
+targetloc 1653 3023 0
+innerloop
+ropeortele
+targetloc 1651 3016 0
+innerloop
+ropeortele
+targetloc 1656 3006 0
+innerloop
+ropeortele
+targetloc 1652 3001 0
+innerloop
+ropeortele
+targetloc 1660 2999 0
+innerloop
+ropeortele
+targetloc 1666 2998 1
+innerloop
+ropeortele
+targetloc 1662 2988 0
+innerloop
+ropeortele
+targetloc 1652 2988 0
+innerloop
+ropeortele
+targetloc 1645 2987 0
+innerloop
+ropeortele
+targetloc 1645 2982 0
+innerloop
+ropeortele
+targetloc 1647 2973 0
+innerloop
+ropeortele
+targetloc 1637 2981 0
+innerloop
+ropeortele
+targetloc 1639 2988 0
+innerloop
+ropeortele
+targetloc 1634 2993 0
+innerloop
+ropeortele
+targetloc 1633 3000 1
+innerloop
+ropeortele
+targetloc 1629 3010 1
+innerloop
+ropeortele
+targetloc 1638 3011 0
+innerloop
+ropeortele
+targetloc 1646 3005 0
+innerloop
+ropeortele
+targetloc 1644 3014 0
+innerloop
+ropeortele
+targetloc 1642 3019 0
+innerloop
+ropeortele
+targetloc 1641 3029 0
+innerloop
+ropeortele
+targetloc 1634 3034 0
+innerloop
+ropeortele
+targetloc 1625 3033 0
+innerloop
+ropeortele
+targetloc 1625 3042 0
+innerloop
+ropeortele
+targetloc 1621 3049 0
+innerloop
+ropeortele
+targetloc 1615 3053 0
+innerloop
+ropeortele
+targetloc 1615 3047 0
+innerloop
+ropeortele
+targetloc 1616 3042 0
+innerloop
+ropeortele
+targetloc 1610 3040 0
+innerloop
+ropeortele
+targetloc 1601 3041 0
+innerloop
+ropeortele
+targetloc 1606 3045 0
+innerloop
+ropeortele
+targetloc 1604 3051 0
+innerloop
+ropeortele
+targetloc 1604 3057 0
+innerloop
+ropeortele
+targetloc 1600 3057 0
+innerloop
+ropeortele
+targetloc 1596 3062 0
+innerloop
+ropeortele
+targetloc 1593 3056 0
+innerloop
+ropeortele
+targetloc 1589 3065 0
+innerloop
+ropeortele
+targetloc 1581 3066 0
+innerloop
+ropeortele
+targetloc 1582 3060 0
+innerloop
+ropeortele
+targetloc 1588 3055 0
+innerloop
+ropeortele
+targetloc 1584 3048 0
+innerloop
+ropeortele
+targetloc 1586 3041 0
+innerloop
+ropeortele
+targetloc 1584 3036 0
+innerloop
+ropeortele
+targetloc 1580 3042 0
+innerloop
+ropeortele
+targetloc 1577 3051 0
+innerloop
+ropeortele
+targetloc 1567 3060 0
+innerloop
+ropeortele
+targetloc 1569 3069 0
+innerloop
+ropeortele
+targetloc 1566 3074 0
+innerloop
+ropeortele
+targetloc 1560 3073 0
+innerloop
+ropeortele
+targetloc 1551 3075 0
+innerloop
+ropeortele
+targetloc 1548 3071 0
+innerloop
+ropeortele
+targetloc 1557 3069 1
+innerloop
+ropeortele
+targetloc 1555 3064 0
+innerloop
+ropeortele
+targetloc 1553 3060 0
+innerloop
+ropeortele
+targetloc 1555 3056 1
+innerloop
+ropeortele
+targetloc 1548 3057 0
+innerloop
+ropeortele
+targetloc 1543 3056 0
+innerloop
+ropeortele
+targetloc 1536 3059 0
+innerloop
+ropeortele
+targetloc 1531 3054 0
+innerloop
+ropeortele
+targetloc 1533 3048 1
+innerloop
+ropeortele
+targetloc 1533 3043 0
+innerloop
+ropeortele
+targetloc 1528 3040 0
+innerloop
+ropeortele
+targetloc 1523 3038 0
+innerloop
+ropeortele
+targetloc 1523 3032 0
+innerloop
+ropeortele
+targetloc 1523 3028 0
+innerloop
+ropeortele
+targetloc 1532 3026 1
+innerloop
+ropeortele
+targetloc 1532 3022 0
+innerloop
+ropeortele
+targetloc 1529 3018 0
+innerloop
+ropeortele
+targetloc 1525 3022 0
+innerloop
+ropeortele
+targetloc 1524 3012 0
+innerloop
+ropeortele
+targetloc 1528 3005 1
+innerloop
+ropeortele
+targetloc 1529 3000 1
+innerloop
+ropeortele
+targetloc 1528 2994 1
+innerloop
+ropeortele
+targetloc 1530 2989 0
+innerloop
+ropeortele
+targetloc 1533 2986 0
+innerloop
+ropeortele
+targetloc 1538 2986 0
+innerloop
+ropeortele
+targetloc 1536 2981 1
+innerloop
+ropeortele
+targetloc 1539 2978 0
+innerloop
+ropeortele
+targetloc 1540 2981 1
+innerloop
+ropeortele
+targetloc 1544 2979 1
+innerloop
+ropeortele
+targetloc 1545 2982 0
+innerloop
+ropeortele
+targetloc 1550 2981 0
+innerloop
+ropeortele
+targetloc 1552 2986 0
+innerloop
+ropeortele
+targetloc 1556 2981 1
+innerloop
+ropeortele
+targetloc 1551 2973 1
+innerloop
+ropeortele
+targetloc 1547 2968 1
+innerloop
+ropeortele
+targetloc 1541 2969 0
+innerloop
+ropeortele
+targetloc 1545 2962 1
+innerloop
+ropeortele
+targetloc 1543 2956 1
+innerloop
+ropeortele
+targetloc 1548 2950 0
+innerloop
+ropeortele
+targetloc 1551 2954 1
+innerloop
+ropeortele
+targetloc 1552 2963 0
+innerloop
+ropeortele
+targetloc 1553 2970 0
+innerloop
+ropeortele
+targetloc 1558 2977 0
+innerloop
+ropeortele
+targetloc 1562 2983 1
+innerloop
+ropeortele
+targetloc 1570 2978 0
+innerloop
+ropeortele
+targetloc 1565 2972 0
+innerloop
+ropeortele
+targetloc 1572 2969 1
+innerloop
+ropeortele
+targetloc 1568 2967 1
+innerloop
+ropeortele
+targetloc 1564 2966 1
+innerloop
+ropeortele
+targetloc 1560 2963 1
+innerloop
+ropeortele
+targetloc 1564 2956 1
+innerloop
+ropeortele
+targetloc 1568 2961 0
+innerloop
+ropeortele
+targetloc 1572 2959 0
+innerloop
+ropeortele
+targetloc 1565 2954 1
+innerloop
+ropeortele
+targetloc 1562 2950 1
+innerloop
+ropeortele
+targetloc 1570 2943 0
+innerloop
+ropeortele
+targetloc 1574 2946 1
+innerloop
+ropeortele
+targetloc 1574 2942 1
+innerloop
+ropeortele
+targetloc 1579 2942 0
+innerloop
+ropeortele
+targetloc 1581 2946 1
+innerloop
+ropeortele
+targetloc 1584 2942 0
+innerloop
+ropeortele
+targetloc 1588 2940 0
+innerloop
+ropeortele
+targetloc 1588 2949 0
+innerloop
+ropeortele
+targetloc 1592 2953 1
+innerloop
+ropeortele
+targetloc 1596 2955 0
+innerloop
+ropeortele
+targetloc 1597 2964 0
+innerloop
+ropeortele
+targetloc 1600 2961 0
+innerloop
+ropeortele
+targetloc 1602 2966 1
+innerloop
+ropeortele
+targetloc 1598 2971 0
+innerloop
+ropeortele
+targetloc 1597 2975 0
+innerloop
+ropeortele
+targetloc 1595 2982 1
+innerloop
+ropeortele
+targetloc 1590 2985 1
+innerloop
+ropeortele
+targetloc 1598 2987 0
+innerloop
+ropeortele
+targetloc 1605 2987 0
+innerloop
+ropeortele
+targetloc 1605 2992 1
+innerloop
+ropeortele
+targetloc 1614 2991 1
+innerloop
+ropeortele
+targetloc 1611 2982 1
+innerloop
+ropeortele
+targetloc 1615 2978 1
+innerloop
+ropeortele
+targetloc 1622 2979 1
+innerloop
+ropeortele
+targetloc 1627 2982 0
+innerloop
+ropeortele
+targetloc 1623 2985 0
+innerloop
+ropeortele
+targetloc 1620 2994 0
+innerloop
+ropeortele
+targetloc 1624 2991 0
+innerloop
+ropeortele
+targetloc 1628 2993 1
+innerloop
+ropeortele
+targetloc 1627 2999 1
+innerloop
+ropeortele
+targetloc 1632 3000 1
+innerloop
+ropeortele
+targetloc 1637 2999 0
+innerloop
+ropeortele
+targetloc 1638 2992 0
+innerloop
+ropeortele
+targetloc 1645 2992 0
+innerloop
+ropeortele
+targetloc 1645 2987 0
+innerloop
+ropeortele
+targetloc 1637 2984 0
+innerloop
+ropeortele
+targetloc 1632 2980 1
+innerloop
+ropeortele
+targetloc 1641 2980 0
+innerloop
+ropeortele
+targetloc 1649 2975 0
+innerloop
+ropeortele
+targetloc 1652 2965 0
+innerloop
+ropeortele
+targetloc 1650 2955 0
+innerloop
+ropeortele
+targetloc 1644 2953 0
+innerloop
+ropeortele
+targetloc 1636 2955 1
+innerloop
+ropeortele
+targetloc 1633 2952 0
+innerloop
+ropeortele
+targetloc 1633 2947 0
+innerloop
+ropeortele
+targetloc 1640 2948 0
+innerloop
+ropeortele
+targetloc 1645 2944 0
+innerloop
+ropeortele
+targetloc 1641 2938 0
+innerloop
+ropeortele
+targetloc 1638 2938 5
+innerloop
+ropeortele
+targetloc 1629 2940 1
+innerloop
+ropeortele
+targetloc 1624 2940 0
+innerloop
+ropeortele
+targetloc 1620 2940 0
+innerloop
+ropeortele
+targetloc 1616 2939 0
+innerloop
+ropeortele
+targetloc 1610 2941 0
+innerloop
+ropeortele
+targetloc 1617 2931 1
+innerloop
+ropeortele
+targetloc 1613 2925 1
+innerloop
+ropeortele
+targetloc 1621 2925 1
+innerloop
+ropeortele
+targetloc 1626 2924 1
+innerloop
+ropeortele
+targetloc 1632 2928 1
+innerloop
+ropeortele
+targetloc 1633 2922 0
+exitlogic

@@ -1,0 +1,163 @@
+startlogic
+innerloop
+ropeortele
+target 0x0 342 1870 2
+innerloop
+ropeortele
+target 0x0 340 1875 0
+innerloop
+ropeortele
+target 0x0 337 1879 0
+innerloop
+ropeortele
+target 0x0 336 1882 2
+innerloop
+ropeortele
+target 0x0 340 1883 2
+innerloop
+ropeortele
+target 0x0 340 1879 0
+innerloop
+ropeortele
+target 0x0 342 1875 0
+innerloop
+ropeortele
+target 0x0 346 1875 0
+innerloop
+ropeortele
+target 0x0 345 1878 0
+innerloop
+ropeortele
+target 0x0 342 1883 0
+innerloop
+ropeortele
+target 0x0 342 1886 0
+innerloop
+ropeortele
+target 0x0 345 1887 0
+innerloop
+ropeortele
+target 0x0 346 1883 0
+innerloop
+ropeortele
+target 0x0 346 1879 0
+innerloop
+ropeortele
+target 0x0 346 1875 0
+innerloop
+ropeortele
+target 0x0 349 1876 4
+innerloop
+ropeortele
+target 0x0 350 1879 2
+innerloop
+ropeortele
+target 0x0 350 1883 0
+innerloop
+ropeortele
+target 0x0 350 1886 1
+innerloop
+ropeortele
+target 0x0 351 1889 1
+innerloop
+ropeortele
+target 0x0 355 1885 4
+innerloop
+ropeortele
+target 0x0 355 1880 4
+innerloop
+ropeortele
+target 0x0 358 1887 3
+innerloop
+ropeortele
+target 0x0 361 1882 3
+innerloop
+ropeortele
+target 0x0 359 1878 1
+innerloop
+ropeortele
+target 0x0 363 1878 0
+innerloop
+ropeortele
+target 0x0 365 1881 0
+innerloop
+ropeortele
+target 0x0 365 1876 0
+innerloop
+ropeortele
+target 0x0 369 1878 0
+innerloop
+ropeortele
+target 0x0 369 1874 0
+innerloop
+ropeortele
+target 0x0 373 1872 2
+innerloop
+ropeortele
+target 0x0 372 1877 0
+innerloop
+ropeortele
+target 0x0 375 1876 2
+innerloop
+innerloop
+ropeortele
+target 0x0 376 1872 2
+innerloop
+ropeortele
+target 0x0 378 1869 2
+innerloop
+ropeortele
+target 0x0 381 1874 2
+innerloop
+ropeortele
+target 0x0 381 1869 2
+innerloop
+ropeortele
+target 0x0 387 1874 5
+innerloop
+ropeortele
+target 0x0 386 1870 5
+innerloop
+ropeortele
+target 0x0 384 1865 5
+innerloop
+ropeortele
+target 0x0 384 1861 5
+innerloop
+ropeortele
+target 0x0 387 1858 5
+innerloop
+ropeortele
+target 0x0 391 1858 5
+innerloop
+ropeortele
+target 0x0 389 1863 5
+innerloop
+ropeortele
+target 0x0 389 1867 5
+innerloop
+ropeortele
+target 0x0 388 1872 5
+innerloop
+ropeortele
+target 0x0 392 1870 5
+innerloop
+ropeortele
+target 0x0 393 1865 5
+innerloop
+ropeortele
+target 0x0 392 1860 5
+innerloop
+ropeortele
+target 0x0 393 1857 11
+innerloop
+ropeortele
+target 0x0 396 1858 12
+innerloop
+ropeortele
+target 0x0 396 1863 11
+innerloop
+ropeortele
+target 0x0 398 1868 10
+innerloop
+exitlogic
