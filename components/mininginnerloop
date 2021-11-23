@@ -46,7 +46,7 @@ while not dead
     //Pause when party menu is up
     while gumpexists 3527489586
     overhead 'pause'
-    say '[coord]
+    say '[coord'
         while not dead
             if insysmsg 'tracking'
                 script 'gtfo'
@@ -62,35 +62,6 @@ while not dead
             endif
         endwhile 
     endwhile
-
-	//World save safety
-    if insysmsg 'world will save in 15'
-        overhead 'world save incomming' 40
-        createtimer 'waitForSave'
-        settimer 'waitForSave' 0
-    endif
-    if timerexists 'waitForSave'
-        if timer 'waitForSave' > 12000
-			overhead 'pausing activity for world save'
-            for 20
-                wait 800
-				if skill 'hiding' > 0 and not hidden
-					skill 'hiding'
-				endif
-                if insysmsg 'Now Tracking'
-                    overhead 'PK Alert' 33
-                    script 'gtfo'
-                endif
-                if insysmsg 'world save complete'
-                    removetimer 'waitForSave'
-                    break
-                endif
-            endfor
-			//Give up. 16 seconds have passed. Just move on.
-			removetimer 'waitForSave'
-            dclick hands
-        endif
-    endif
     
     //Hand ore to packhorses if overweight
     if diffweight < 15
