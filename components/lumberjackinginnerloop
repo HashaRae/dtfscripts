@@ -46,37 +46,28 @@ while not dead
 	    overhead 'PK Alert or no tools' 33
         script 'gtfo'
     endif
-	
-	//World save safety
-    if insysmsg 'world will save in 15'
-        overhead 'world save incomming' 40
-        createtimer 'waitForSave'
-        settimer 'waitForSave' 0
-    endif
-    if timerexists 'waitForSave'
-        if timer 'waitForSave' > 12000
-			overhead 'pausing activity for world save'
-            for 20
-                wait 800
-				if skill 'hiding' > 0 and not hidden
-					skill 'hiding'
-				endif
-                if insysmsg 'Now Tracking'
-                    overhead 'PK Alert' 33
-                    script 'gtfo'
+
+    //Pause when party menu is up
+    while gumpexists 3527489586
+        overhead 'pause'
+        say '[coord'
+        while not dead
+            if insysmsg 'tracking'
+                script 'gtfo'
+            endif
+            if not gumpexists 3527489586
+                if lhandempty ?? 0
+                    dclicktype '3908' 'backpack'
+                    wait 600
                 endif
-                if insysmsg 'world save complete'
-                    removetimer 'waitForSave'
-                    break
-                endif
-            endfor
-			//Give up. 16 seconds have passed. Just move on.
-			removetimer 'waitForSave'
-            dclick hands
-			waitfortarget 2000
-			target self
-        endif
-    endif
+                overhead 'resume'
+                dclick hands
+                waitfortarget 2000
+                target self
+                break
+            endif
+        endwhile 
+    endwhile
     
     //Hand lumber to packhorses if overweight
     if diffweight < 15
